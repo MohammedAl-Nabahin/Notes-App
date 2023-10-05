@@ -1,11 +1,25 @@
 const yargs = require('yargs');
+const chalk = require('chalk');
 
 // add command
 yargs.command({
     command: 'add',
     describe : 'adding a new note.',
-    handler: ()=>{
-        console.log("adding your note")
+    builder: {
+        title:{
+            describe: 'Note  title',
+            demandOption: true,
+            type: 'string'
+        },
+        body:{
+            describe: 'Note  body',
+            demandOption: true,
+            type: 'string'
+        }        
+    },
+    handler: (argv)=>{
+        console.log(chalk.blue.inverse("Title: "), argv.title);
+        console.log(chalk.gray.inverse("Body: "), argv.body);
     }
 })
 
@@ -37,4 +51,4 @@ yargs.command({
 })
 
 
-console.log(yargs.argv)
+yargs.parse()
